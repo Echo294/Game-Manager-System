@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        GameManager gameManager = new GameManager();
 
         while (true) {
             System.out.println("Welcome to your game manager library!");
@@ -13,20 +14,28 @@ public class Main {
             System.out.println("3. Remove game");
             System.out.println("4. Exit");
 
-            int choice = scanner.nextInt();
+            int choice;
+
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+            } else {
+                System.out.println("Invalid Choice. Please enter a number from 1 to 4.");
+                scanner.next();
+                continue;
+            }
 
             if (choice == 1) {
-                //game logistics
+                scanner.nextLine();
+                gameManager.addGame(scanner);
             } else if (choice == 2) {
-                //viewing game collection
+                gameManager.viewGames();
             } else if (choice == 3) {
-                //remove game
+                gameManager.removeGame(scanner);
             } else if (choice == 4) {
                 System.out.println("Exiting the program. Goodbye!");
                 break;
             } else {
-                System.out.println("Invalid Choice.");
-                continue;
+                System.out.println("Invalid Choice. Please try again.");
             }
         }
     }
